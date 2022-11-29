@@ -1,0 +1,28 @@
+[
+    { "name": "STORY-4513: Add tooltip", "category": "wip", "bgcolor": "yellow", "draggable": true },
+    {
+      "name": "STORY-4547: Fix search bug",
+      "category": "wip",
+      "bgcolor": "yellow",
+      "draggable": true
+    },
+    {
+      "name": "STORY-4525: New filter option",
+      "category": "complete",
+      "bgcolor": "lightgreen",
+      "draggable": true
+    },
+    {
+      "name": "STORY-4526: Remove region filter",
+      "category": "complete",
+      "bgcolor": "lightgreen",
+      "draggable": true
+    },
+    {
+      "name": "STORY-4520: Improve performance",
+      "category": "complete",
+      "bgcolor": "lightgreen",
+      "draggable": true
+    }
+   
+  ]
