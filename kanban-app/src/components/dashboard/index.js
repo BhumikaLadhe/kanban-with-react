@@ -97,7 +97,7 @@ const Dashboard = () => {
    console.log(tasks, 'tasks')
       return (
         <div style={styles.dragDropContainer}>
-          <h2 style={styles.dragDropHeader}>JIRA BOARD: Sprint 21U</h2>
+          <h2 style={styles.dragDropHeader}>STORY BOARD</h2>
           {isEmpty(tasks) ? 
          <div style={styles.dragDropBoard}>  loading..... </div> : 
           <div style={styles.dragDropBoard}>
