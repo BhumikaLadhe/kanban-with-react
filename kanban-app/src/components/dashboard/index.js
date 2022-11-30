@@ -5,6 +5,8 @@ import TaskList from '../../../utils/data.json'
 const Dashboard = () => {
 
     const [tasks, setTasks] = useState();
+    const [openTask, setNewTask] = useState(false)
+    const [newLabel,setNewLabel] = useState()
     const bgColorMap = {
         new: 'lightBlue',
         wip: 'yellow',
@@ -42,7 +44,7 @@ const Dashboard = () => {
     
         //this div is the task card which is 'draggable' and calls onDragStart method
         //when we drag it
-        console.log(typeof(tasks),'atsks')
+
         tasks.forEach((t) => {
           tasksToRender[t.category].push(
             <Cards task={t} onDragStart={onDragStart}/>
@@ -53,10 +55,9 @@ const Dashboard = () => {
       };
 
       useEffect(() => {
-        localStorage.setItem('list', JSON.stringify([]));
+        // localStorage.setItem('list', JSON.stringify([]));
         const persistedData = JSON.parse(JSON.stringify((localStorage.getItem('list')))) !== 'undefined' ?  JSON.parse(JSON.stringify((localStorage.getItem('list'))))  : [TaskList];
-        console.log(JSON.parse(persistedData) !== undefined, JSON.parse(persistedData) !== null, JSON.parse(persistedData) !== 'undefined' ,  JSON.parse(persistedData).length !== 0  )
-        if(JSON.parse(persistedData).length !== 0 ) {
+        if(persistedData ) {
             setTasks(JSON.parse(persistedData))
             return
         }
@@ -73,13 +74,27 @@ const Dashboard = () => {
       useEffect(() => {
         localStorage.setItem('list', JSON.stringify(tasks));
       }, [tasks]);
-    console.log(tasks, 'tak', typeof(tasks))
+
    const isEmpty = (obj) => obj === undefined || obj === {} || obj === null
 
 
-  const createNewTask = () => {
+  const openNewTask = () => {
+    console.log('click')
+    setNewTask(true)
+   }
+   const createNewTask = () => {
+    const t = {
+      "name": newLabel,
+      "category": "new",
+      "bgcolor": "lightblue",
+      "draggable": true
+    }
+    setTasks([...tasks,t ]);
+    setNewTask(false)
 
    }
+
+   console.log(tasks, 'tasks')
       return (
         <div style={styles.dragDropContainer}>
           <h2 style={styles.dragDropHeader}>JIRA BOARD: Sprint 21U</h2>
@@ -88,17 +103,24 @@ const Dashboard = () => {
           <div style={styles.dragDropBoard}>
           <div
               style={styles.wip}
+              draggable
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => {
                 onDrop(e, "new");
               }}
             >
-              <div style={styles.taskHeader}>NEW</div>
+              <div style={styles.taskHeader} >NEW</div>
               {getTask().new}
-              <Cards task={newTask} onClick={createNewTask}/>
+              {openTask && <div style={{ display:'flex', flexDirection: 'column'}}>
+                <input style={{height: '50px', marginBottom: '10px'}} onChange={(e) => { setNewLabel(e.target.value) }}/>
+                <button onClick={createNewTask}>Done</button>
+                </div>
+              }
+              <Cards task={newTask} onClick={openNewTask} />
             </div>
             <div
               style={styles.wip}
+              draggable
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => {
                 onDrop(e, "wip");
@@ -108,6 +130,7 @@ const Dashboard = () => {
               {getTask().wip}
             </div>
             <div
+            draggable
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => onDrop(e, "complete")}
             >
