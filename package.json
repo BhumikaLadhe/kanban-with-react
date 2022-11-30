@@ -1,0 +1,6 @@
+{
+  "name": "kanban",
+  "scripts": {
+    "build": "npm run build"
+  }
+}
