@@ -14,9 +14,7 @@ const Dashboard = () => {
     }
     
       //this event is for the dragged task card.
-      //this is required to save unique id in the dom event so that when we drop it we would know the card id
       const onDragStart = (event, id) => {
-        console.log(event, id)
         event.dataTransfer.setData("id", id);
       };
     
@@ -42,8 +40,7 @@ const Dashboard = () => {
           complete: [],
         };
     
-        //this div is the task card which is 'draggable' and calls onDragStart method
-        //when we drag it
+        //when we drag it calls onDragStart method
 
         tasks.forEach((t) => {
           tasksToRender[t.category].push(
@@ -55,7 +52,6 @@ const Dashboard = () => {
       };
 
       useEffect(() => {
-        // localStorage.setItem('list', JSON.stringify([]));
         const persistedData = JSON.parse(JSON.stringify((localStorage.getItem('list')))) !== 'undefined' ?  JSON.parse(JSON.stringify((localStorage.getItem('list'))))  : [TaskList];
         if(persistedData ) {
             setTasks(JSON.parse(persistedData))
@@ -79,7 +75,6 @@ const Dashboard = () => {
 
 
   const openNewTask = () => {
-    console.log('click')
     setNewTask(true)
    }
    const createNewTask = () => {
@@ -94,7 +89,6 @@ const Dashboard = () => {
 
    }
 
-   console.log(tasks, 'tasks')
       return (
         <div style={styles.dragDropContainer}>
           <h2 style={styles.dragDropHeader}>STORY BOARD</h2>
@@ -102,7 +96,6 @@ const Dashboard = () => {
          <div style={styles.dragDropBoard}>  loading..... </div> : 
           <div style={styles.dragDropBoard}>
           <div
-              style={styles.wip}
               draggable
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => {
@@ -119,7 +112,6 @@ const Dashboard = () => {
               <Cards task={newTask} onClick={openNewTask} />
             </div>
             <div
-              style={styles.wip}
               draggable
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => {

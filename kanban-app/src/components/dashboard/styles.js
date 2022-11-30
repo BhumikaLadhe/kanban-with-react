@@ -12,14 +12,17 @@ const styles = {
   
   dragDropHeader: {
     textDecorationLine: 'underline',
-    fontSize:'1.5rem'
+    fontSize:'1.5rem',
+    top: 0
   },
   
   taskHeader: {
     margin: '10px',
     textDecoration: 'underline',
-    fontSize: '1rem'
-  }
+    fontSize: '1rem',
+    fontWeight: 'Bold'
+  },
+
   
   
 }
