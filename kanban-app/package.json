@@ -3,9 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
-    "vercel-build": "npm run prepare && next build"
   },
   "dependencies": {
     "next": "latest",
